@@ -44,7 +44,7 @@ class Cgroupfs:
 
         self.mount_cgroup()
         self.find_controllers()
-        for cname, c in self.controllers.items():
+        for cname, c in list(self.controllers.items()):
             c.mount()
 
     def check_fstab(self):

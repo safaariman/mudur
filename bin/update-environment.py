@@ -66,7 +66,7 @@ def read_env_d(envdir):
     paths.sort()
 
     for path in paths:
-        for line in file(path):
+        for line in open(path):
             if line == "" or line.startswith("#"):
                 continue
 
@@ -80,7 +80,7 @@ def read_env_d(envdir):
 
                 # Merge for special variables, override for others
                 if key in specials:
-                    if d.has_key(key):
+                    if key in d:
                         d[key].extend(value.split(":"))
                     else:
                         d[key] = value.split(":")
@@ -91,7 +91,7 @@ def read_env_d(envdir):
 
 def generate_profile_env(envdict, format='export %s="%s"\n'):
     profile = ""
-    keys = envdict.keys()
+    keys = list(envdict.keys())
     keys.sort()
     for key in keys:
         tmp = envdict[key]
@@ -101,7 +101,7 @@ def generate_profile_env(envdict, format='export %s="%s"\n'):
     return header + header_note + profile
 
 def update_file(path, content):
-    f = file(path, "w")
+    f = open(path, "w")
     f.write(content)
     f.close()
 
@@ -117,7 +117,7 @@ def update_environment(prefix):
 #
 
 def usage():
-    print "update-environment [--destdir <prefix>]"
+    print("update-environment [--destdir <prefix>]")
 
 def main(argv):
     prefix = "/"

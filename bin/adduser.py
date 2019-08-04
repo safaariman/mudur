@@ -30,7 +30,7 @@ user = {"uid": -1,
 defaultGroups = "users,cdrom,plugdev,floppy,disk,audio,video,power,dialout,lp,lpadmin"
 
 def fail(_message):
-    print _message
+    print(_message)
     sys.exit(1)
 
 def connectToDBus():
@@ -52,7 +52,7 @@ def addUser():
                     user["home"], user["shell"], user["password"],
                     user["groups"], user["grants"], user["blocks"],
                     dbus_interface="tr.org.pardus.comar.User.Manager")
-    except dbus.DBusException, e:
+    except dbus.DBusException as e:
         fail("Error: %s" % e)
 
 
@@ -121,8 +121,8 @@ if __name__ == "__main__":
     user["uid"] = opts.uid
 
     if opts.dryrun:
-        for i in user.keys():
-            print "%s\t%s" % (i, user[i])
+        for i in list(user.keys()):
+            print("%s\t%s" % (i, user[i]))
     else:
         if os.getuid() != 0:
             fail("You must have root permissions to add a user")
