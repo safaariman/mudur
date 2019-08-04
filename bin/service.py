@@ -23,7 +23,7 @@ import subprocess
 
 import gettext
 __trans = gettext.translation('mudur', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # Utilities
 

@@ -29,7 +29,7 @@ from mudur_cgroupfs import Cgroupfs
 ########
 
 __trans = gettext.translation('mudur', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 ##############
 # Decorators #
@@ -601,7 +601,7 @@ def load_translations():
     global _
     lang = CONFIG.get("language")
     __trans = gettext.translation('mudur', languages=[lang], fallback=True)
-    _ = __trans.ugettext
+    _ = __trans.gettext
 
 def set_unicode_mode():
     """Makes TTYs unicode compatible."""
